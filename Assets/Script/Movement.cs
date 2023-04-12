@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     public Vector2 direction { get; private set; }
     public Vector2 nextDirection { get; private set; }
     public Vector3 startingPosition { get; private set; }
+    
     private void Awake()
     {
         this.rigidbody = GetComponent<Rigidbody2D>();
