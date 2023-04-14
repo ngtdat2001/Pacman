@@ -49,9 +49,9 @@ public class Movement : MonoBehaviour
         this.rigidbody.MovePosition(position + translation);
     }
 
-    public void SetDirection(Vector2 direction, bool forced = false)
+    public void SetDirection(Vector2 direction, bool force = false)
     {
-        if (forced || !Occupied(direction))
+        if (!Occupied(direction) || force)
         {
             this.direction = direction;
             this.nextDirection = Vector2.zero;

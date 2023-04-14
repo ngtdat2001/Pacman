@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3213626637884905765}
   - component: {fileID: 632753925391268658}
   - component: {fileID: 3232836389697499693}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 2395459635832658608}
   - component: {fileID: 3510038706441885066}
   - component: {fileID: 2678156059831058770}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6876966838204913018}
   - component: {fileID: 8144859195196243542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -398,6 +398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc06e14160a1714f894f6cd365b1601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialBehavior: {fileID: 0}
+  target: {fileID: 0}
   points: 200
 --- !u!114 &1787471615966374568
 MonoBehaviour:
@@ -411,6 +413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae7721fe2ef006d49bcb2c0e117fcd5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 0
+  inside: {fileID: 0}
+  outside: {fileID: 0}
 --- !u!114 &4422202608086816824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37c3ba1976133645a67085fcbc42059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 7
 --- !u!114 &3201438078302797686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7963d1e29466d57478f0180dbcfc27f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 20
 --- !u!114 &6597097923923575092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +454,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5ea9b4c7a4bc994b85f6f557acd7276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 8
+  body: {fileID: 632753925391268658}
+  eyes: {fileID: 8144859195196243542}
+  blue: {fileID: 3510038706441885066}
+  white: {fileID: 1530074164929711688}
 --- !u!1 &3805319579475695097
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +470,7 @@ GameObject:
   - component: {fileID: 2702112505341613465}
   - component: {fileID: 1530074164929711688}
   - component: {fileID: 581599998950290175}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: White
   m_TagString: Untagged
   m_Icon: {fileID: 0}
