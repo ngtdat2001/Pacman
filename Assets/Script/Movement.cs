@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -21,6 +22,20 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(Stop());
+    }
+
+    IEnumerator Stop()
+    {
+        float tempDirx;
+        float tempDiry;
+        tempDirx = initialDirection.x;
+        tempDiry = initialDirection.y;
+        initialDirection.x = 0;
+        initialDirection.y = 0;
+        yield return new WaitForSeconds(5);
+        initialDirection.x = tempDirx;
+        initialDirection.y = tempDiry;
         ResetState();
     }
 
@@ -35,6 +50,7 @@ public class Movement : MonoBehaviour
     }
     private void Update()
     {
+        StopCoroutine(Stop());
         if(this.nextDirection != Vector2.zero)
         {
             SetDirection(this.nextDirection);
