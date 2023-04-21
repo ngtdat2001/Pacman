@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource eatPPellets;
     [SerializeField] private AudioSource eatGhost;
     [SerializeField] private AudioSource death;
+    [SerializeField] private AudioSource victory;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -38,7 +39,6 @@ public class GameManager : MonoBehaviour
 
     int tempscore;
     int templives;
-
 
     private void Start()
     {
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        death.Play();
         gameOver.enabled = true;
         for (int i = 0; i < this.ghosts.Length; i++)
         {
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
         SetScore(this.score + pellete.points);
         if (!HasRemainingPellets())
         {
+            victory.Play();
             this.pacman.gameObject.SetActive(false);
             Invoke(nameof(NewRound), 3.0f);
         }
@@ -233,6 +235,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("Pellet_" + i + "_y", pellet.position.y);
         }
     }
+
     public void Load()
     {
         for (int i = 0; i < pellets.childCount; i++)
