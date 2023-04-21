@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
-    public int highestScore { get; private set; }
     public int lives { get; private set; }
 
     Vector3 pacmanTransform;
@@ -44,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         intro.Play();
         NewGame();
+        highScoreT.text = "HiScore:" + PlayerPrefs.GetInt("HiScore").ToString();
     }
 
     private void Update()
@@ -52,11 +52,6 @@ public class GameManager : MonoBehaviour
         {
             NewGame();
         }
-        if (score > highestScore)
-        {
-            highestScore = score;
-        }
-        highScoreT.text = "Highest Score: " + highestScore.ToString();
         Menu();
     }
 
@@ -104,6 +99,11 @@ public class GameManager : MonoBehaviour
     {
         Score.text = "Score: " + score.ToString();
         this.score = score;
+        if (score > PlayerPrefs.GetInt("HiScore" , 0))
+        {
+            PlayerPrefs.SetInt("HiScore", score);
+            highScoreT.text = "HiScore:" +  score.ToString();
+        }
     }
 
     private void SetLives(int lives)
