@@ -238,6 +238,7 @@ public class GameManager : MonoBehaviour
 
     public void Load()
     {
+        ResetState();
         for (int i = 0; i < pellets.childCount; i++)
         {
             int isActive = PlayerPrefs.GetInt("Pellet_" + i, 1);
