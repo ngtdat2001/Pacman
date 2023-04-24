@@ -76,4 +76,27 @@ public class GhostFrightened : GhostBehavior
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Node node = collision.GetComponent<Node>();
+        if (node != null && this.enabled)
+        {
+            Vector2 direction = Vector2.zero;
+            float maxDistance = float.MinValue;
+
+            foreach (Vector2 availableDirection in node.availableDirections)
+            {
+                Vector3 newPosition = this.transform.position + new Vector3(availableDirection.x, availableDirection.y, 0f);
+                float distance = (this.ghost.target.position - newPosition).sqrMagnitude;
+
+                if (distance > maxDistance)
+                {
+                    direction = availableDirection;
+                    maxDistance= distance;
+                }
+            }
+
+            this.ghost.movement.SetDirection(direction);
+        }
+    }
 }
