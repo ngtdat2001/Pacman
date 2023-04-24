@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         {
             victory.Play();
             this.pacman.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 3.0f);
+            Invoke(nameof(NewRound), 5.0f);
         }
     }
 
@@ -264,7 +264,7 @@ public class GameManager : MonoBehaviour
         blue.transform.position = blueTransform;
         red.transform.position = redTransform;
         orange.transform.position = orangeTransform;
-        score = tempscore;
-        lives = templives;
+        SetLives(templives);
+        SetScore(tempscore);
     }
 }
