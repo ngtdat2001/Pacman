@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+public class Ghost : MonoBehaviour, IDataPersistence
 {
     public Movement movement { get; private set; }
     public GhostHome home { get; private set; }
@@ -26,6 +26,21 @@ public class Ghost : MonoBehaviour
     private void Start()
     {
         ResetState();
+    }
+
+    public void LoadData(GameData data)
+    {
+        GameObject.Find("Ghost_Blinky").transform.position = data.blinkyPos;
+        GameObject.Find("Ghost_Inky").transform.position = data.inkyPos;
+        GameObject.Find("Ghost_Pinky").transform.position = data.pinkyPos;
+        GameObject.Find("Ghost_Clyde").transform.position = data.clydePos;
+    }
+    public void SaveData(GameData data)
+    {
+        data.blinkyPos = GameObject.Find("Ghost_Blinky").transform.position;
+        data.inkyPos = GameObject.Find("Ghost_Inky").transform.position;
+        data.pinkyPos = GameObject.Find("Ghost_Pinky").transform.position;
+        data.clydePos = GameObject.Find("Ghost_Clyde").transform.position;
     }
 
     public void ResetState()

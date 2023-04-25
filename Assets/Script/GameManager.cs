@@ -5,14 +5,13 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, IDataPersistence
 {
     public Ghost[] ghosts;
     public Pacman pacman;
     public Transform pellets;
     public GameObject MenuUI;
     public static bool GameIsPaused = false;
-    public static bool PelletsIsEaten = false;
 
     public TMP_Text highScoreT;
     public TMP_Text Score;
@@ -30,15 +29,6 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
 
-    Vector3 pacmanTransform;
-    Vector3 pinkTransform;
-    Vector3 redTransform;
-    Vector3 blueTransform;
-    Vector3 orangeTransform;
-
-    int tempscore;
-    int templives;
-
     private void Start()
     {
         intro.Play();
@@ -53,6 +43,33 @@ public class GameManager : MonoBehaviour
             NewGame();
         }
         Menu();
+    }
+    public void LoadData(GameData data) 
+    {
+        this.score = data.Score;
+        this.lives = data.Lives;
+        foreach (Transform pells in pellets)
+        {
+            if (data.pelPos.Contains(pells.transform.position))
+            {
+                pells.gameObject.SetActive(false);
+            }
+            else
+            {
+                pells.gameObject.SetActive(true);
+            }
+        }
+
+    }
+    public void SaveData(GameData data) 
+    {
+        data.Score = this.score;
+        data.Lives = this.lives;
+        foreach (Transform pells in pellets)
+        {
+            if (!pells.gameObject.activeSelf)
+                data.pelPos.Add(pells.transform.position);
+        }
     }
 
     private void NewGame()
@@ -211,60 +228,5 @@ public class GameManager : MonoBehaviour
         MenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-    }
-    public void Save()
-    {
-        GameObject pac = GameObject.Find("Pacman");
-        GameObject pink = GameObject.Find("Ghost_Pinky");
-        GameObject blue = GameObject.Find("Ghost_Inky");
-        GameObject red = GameObject.Find("Ghost_Blinky");
-        GameObject orange = GameObject.Find("Ghost_Clyde");
-        pacmanTransform = pac.transform.position;
-        pinkTransform = pink.transform.position;
-        redTransform = red.transform.position;
-        blueTransform = blue.transform.position;
-        orangeTransform = orange.transform.position;
-        tempscore = score;
-        templives = lives;
-        for (int i = 0; i < pellets.childCount; i++)
-        {
-            Transform pellet = pellets.GetChild(i);
-            int isActive = pellet.gameObject.activeSelf ? 1 : 0;
-            PlayerPrefs.SetInt("Pellet_" + i, isActive);
-            PlayerPrefs.SetFloat("Pellet_" + i + "_x", pellet.position.x);
-            PlayerPrefs.SetFloat("Pellet_" + i + "_y", pellet.position.y);
-        }
-    }
-
-    public void Load()
-    {
-        ResetState();
-        for (int i = 0; i < pellets.childCount; i++)
-        {
-            int isActive = PlayerPrefs.GetInt("Pellet_" + i, 1);
-            if (isActive == 0)
-            {
-                pellets.GetChild(i).gameObject.SetActive(false);
-            }
-            else
-            {
-                pellets.GetChild(i).gameObject.SetActive(true);
-                float x = PlayerPrefs.GetFloat("Pellet_" + i + "_x");
-                float y = PlayerPrefs.GetFloat("Pellet_" + i + "_y");
-                pellets.GetChild(i).position = new Vector3(x, y, 0);
-            }
-        }
-        GameObject pac = GameObject.Find("Pacman");
-        GameObject pink = GameObject.Find("Ghost_Pinky");
-        GameObject blue = GameObject.Find("Ghost_Inky");
-        GameObject red = GameObject.Find("Ghost_Blinky");
-        GameObject orange = GameObject.Find("Ghost_Clyde");
-        pac.transform.position = pacmanTransform;
-        pink.transform.position = pinkTransform;
-        blue.transform.position = blueTransform;
-        red.transform.position = redTransform;
-        orange.transform.position = orangeTransform;
-        SetLives(templives);
-        SetScore(tempscore);
     }
 }

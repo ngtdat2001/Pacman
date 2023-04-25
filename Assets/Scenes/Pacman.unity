@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 5893579}
   - component: {fileID: 5893581}
   - component: {fileID: 5893580}
+  - component: {fileID: 5893582}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -202,6 +203,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5893578}
   m_CullTransparentMesh: 1
+--- !u!114 &5893582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8586e2e4d8e05b14f9d7663172bbbffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &49381392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,9 +2265,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 738308429}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Load
+      - m_Target: {fileID: 5893582}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: LoadGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4906,6 +4919,7 @@ GameObject:
   - component: {fileID: 738308433}
   - component: {fileID: 738308432}
   - component: {fileID: 738308436}
+  - component: {fileID: 738308437}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5534,6 +5548,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &738308437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738308428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39ace5b320f9044babd767e515139df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: dataGame.json
 --- !u!1 &817270880
 GameObject:
   m_ObjectHideFlags: 0
@@ -11731,9 +11758,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 738308429}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Save
+      - m_Target: {fileID: 5893582}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: SaveGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

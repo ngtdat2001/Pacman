@@ -1,30 +1,31 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Movement))]
-public class Pacman : MonoBehaviour
+public class Pacman : MonoBehaviour, IDataPersistence
 {
     public Movement movement { get; private set; }
     private void Awake()
     {
-        this.movement = GetComponent<Movement>();   
+        this.movement = GetComponent<Movement>();
     }
     private void Update()
     {
-       if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-       {
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
             this.movement.SetDirection(Vector2.up);
-       }else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-       {
+        }
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
             this.movement.SetDirection(Vector2.down);
-       }
-       else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-       {
+        }
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        {
             this.movement.SetDirection(Vector2.left);
-       }
-       else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-       {
+        }
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        {
             this.movement.SetDirection(Vector2.right);
-       }
+        }
 
         float angle = Mathf.Atan2(this.movement.direction.y, this.movement.direction.x);
         this.transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
@@ -37,4 +38,12 @@ public class Pacman : MonoBehaviour
     }
 
 
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.pacmanPosition;
+    }
+    public void SaveData(GameData data)
+    {
+        data.pacmanPosition = this.transform.position;
+    }
 }
